@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { is } from "zod/v4/locales";
  
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -20,19 +21,22 @@ const authMiddleware = (req,res,next) =>{
     }
     try{
         const decoded =  jwt.verify(tokenData,JWT_SECRET);
-        if(!decoded.userId){
+        if(!decoded){
             return res.status(401).json({msg:"wrong/invalid token"});
         }
-        req.userId = decoded.userId;
+        req.user = decoded;
         next();
-
-
     }
     catch(e){
         return res.status(401).json({msg:"something went wrong while verifying token"});
     }
-
-
 }
 
-export default authMiddleware;
+const isAdmin = (req,res,next)=>{
+    if(req.user.role !== "ADMIN" ){
+        return res.status(401).json({msg:"admin access required"});
+    }
+    next();
+}
+
+export  {authMiddleware,isAdmin};
