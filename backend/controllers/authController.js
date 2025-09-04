@@ -51,18 +51,22 @@ export const login = async (req,res)=>{
         return res.status(400).json({msg:"error while parsing the data",errors:result.error.message});
     }
     const {Email,Password}  = result.data;
-   
-
-    return res.status(200).json({msg:"login success", body:{Email,Password}});
-
-    // const user =  await user.findById(email);
-    // if(!user){
-    //     return res.status(400).json({msg:"user doest not exist"}) 
-    // }
-
-    // const isMatch = await user.comparePassword(passwrod,stringPassword);
-    // if(!isMatch){
-    //     return res.status(400).json({msg:"password is wrong"});
-    // }
-    
+    try{
+        const user = await prisma.user.findUnique({
+            where:{email:Email}
+        })
+        if(!user){
+            return res.status(400).json({msg:"user does not exist"});
+        }
+        const isMatch  =await bcrypt.compare(Password,user.passWordHash);
+        if(!isMatch){
+            return res.status(400).json({msg:"password is wrong"});
+        }
+        const token = generateToken(user.id,user.email,user.role);
+        const {passWordHash,...userWithOutPassword} = user;
+        return res.status(200).json({msg:"login success",user:userWithOutPassword,token:token});
+    }
+    catch(e){
+        return res.status(500).json({msg:"error occured while logging in",error:e.message});
+    }
 }
