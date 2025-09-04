@@ -11,3 +11,9 @@ export const loginShema = z.object({
     Email:z.email().min(5,"email must be atleast 5 characters").max(30,"email cannot be more than 30 characters"),
     Password:z.string().min(1,"password is required")
 })
+
+
+export const updatePasswordShema = z.object({
+    OldPassword : z.string().min(1,"old password is required"),
+    NewPassword : z.string().min(1,"new password is required")
+})
