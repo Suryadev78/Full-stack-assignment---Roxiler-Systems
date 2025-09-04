@@ -1,4 +1,4 @@
-import { loginShema, signUpShema } from "../validators/authShema.js";
+import { loginShema, signUpShema, updatePasswordShema } from "../validators/authShema.js";
 import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient()
 import jwt from "jsonwebtoken"
@@ -68,5 +68,37 @@ export const login = async (req,res)=>{
     }
     catch(e){
         return res.status(500).json({msg:"error occured while logging in",error:e.message});
+    }
+}
+
+
+export const updatePassword = async (req,res)=>{
+    const result  = updatePasswordShema.safeParse(req.body);
+    if(!result.success){
+        return res.status(400).json({msg:"error while parsing the body that you've sent",errors:result.error.messagee});
+    }
+    const {oldPassword,newPassword} = result.data;
+    const {userId} = req.user;
+    try{
+        const user = await prisma.user.findUnique({
+            where:{id:userId}
+        })
+        if(!user){
+            return res.status(400).json({msg:"user does not exist"});
+        }
+
+        const isMatch = await bcrypt.compare(oldPassword,user.passWordHash);
+        if(!isMatch){
+            return res.status(400).json({msg:"old password is wrong"});
+        }
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword,saltRounds);
+        const updateUserPasswrod = await prisma.user.update({
+            where:{id:userId}
+        })
+        return res.status(200).json({msg:"password updated successfully"});
+    }
+    catch(e){p
+        return res.status(500).json({msg:"error while updating password",error:e.message});
     }
 }
