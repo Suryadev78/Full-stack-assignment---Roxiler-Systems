@@ -1,8 +1,7 @@
 import { Router } from "express";
+import authRouter from "./authRouter.js";
+
 
 const userRouter = Router();
-
-userRouter.get("/getUser",(req,res)=>{
-    res.send("Hello from userRouter");
-})
+userRouter.use("/auth",authRouter);;
 export default userRouter;
