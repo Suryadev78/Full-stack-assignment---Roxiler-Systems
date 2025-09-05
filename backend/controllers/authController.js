@@ -75,7 +75,7 @@ export const login = async (req,res)=>{
 export const updatePassword = async (req,res)=>{
     const result  = updatePasswordShema.safeParse(req.body);
     if(!result.success){
-        return res.status(400).json({msg:"error while parsing the body that you've sent",errors:result.error.messagee});
+        return res.status(400).json({msg:"error while parsing the body that you've sent",errors:result.error.message});
     }
     const {oldPassword,newPassword} = result.data;
     const {userId} = req.user;
@@ -93,8 +93,11 @@ export const updatePassword = async (req,res)=>{
         }
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(newPassword,saltRounds);
-        const updateUserPasswrod = await prisma.user.update({
-            where:{id:userId}
+        await prisma.user.update({
+            where:{id:userId},
+            data:{
+                passWordHash:hashedPassword
+            }
         })
         return res.status(200).json({msg:"password updated successfully"});
     }
