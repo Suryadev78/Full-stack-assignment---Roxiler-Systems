@@ -3,17 +3,20 @@ const prisma = new PrismaClient();
 
 
 export const listUsersByFilter =async (req,res)=>{
+    const validRoles = ["ADMIN", "USER", "STORE_OWNER"];
     try{
         const { search, sortBy = "id", order = "asc" } = req.query;
         const users = await prisma.user.findMany({
             where: search
               ? {
-                  OR: [
+                OR: [
                     { name: { contains: search, mode: "insensitive" } },
                     { email: { contains: search, mode: "insensitive" } },
                     { address: { contains: search, mode: "insensitive" } },
-                    { role: search ? { equals: search.toUpperCase() } : undefined }
-                  ],
+                    validRoles.includes(search.toUpperCase())
+                      ? { role: { equals: search.toUpperCase() } }
+                      : undefined
+                  ].filter(Boolean),
                 }
               : undefined,
             include: {
