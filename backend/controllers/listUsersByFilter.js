@@ -4,25 +4,25 @@ const prisma = new PrismaClient();
 
 export const listUsersByFilter =async (req,res)=>{
     try{
-        const {name,email,address,role, sortBy = "id" ,order = "asc"} = req.query;
+        const { search, sortBy = "id", order = "asc" } = req.query;
         const users = await prisma.user.findMany({
-            where:{
-                name:name? {contains:name,mode:"insensitive"} : undefined,
-                email:email?{contains:email,mode:"insensitive"} : undefined,
-                address:address?{contains:address,mode:"insensitive"} :undefined,
-                role: role ? role.toUpperCase(): undefined
-            },
-            include:{
-                store:{
-                    include:{
-                        ratings:true
-                    }
+            where: search
+              ? {
+                  OR: [
+                    { name: { contains: search, mode: "insensitive" } },
+                    { email: { contains: search, mode: "insensitive" } },
+                    { address: { contains: search, mode: "insensitive" } },
+                    { role: { contains: search.toUpperCase(), mode: "insensitive" } },
+                  ],
                 }
+              : undefined,
+            include: {
+              store: {
+                include: { ratings: true },
+              },
             },
-            orderBy:{
-                [sortBy] : order
-            } 
-        })
+            orderBy: { [sortBy]: order },
+          });
         const formattedUsers = users.map(user =>{
             let avgRating = 0;
             if(user.role === "STORE_OWNER" && user.store){
