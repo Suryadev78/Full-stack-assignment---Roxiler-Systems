@@ -12,7 +12,7 @@ export const listUsersByFilter =async (req,res)=>{
                     { name: { contains: search, mode: "insensitive" } },
                     { email: { contains: search, mode: "insensitive" } },
                     { address: { contains: search, mode: "insensitive" } },
-                    { role: { contains: search.toUpperCase(), mode: "insensitive" } },
+                    { role: search ? { equals: search.toUpperCase() } : undefined }
                   ],
                 }
               : undefined,
