@@ -71,6 +71,5 @@ Frontend: http://localhost:5173
 
 To deploy the project, you can use any cloud hosting service that supports Node.js and PostgreSQL.
 
-### Contributing
+Made with ❤️ by [Suryadev](https://github.com/Suryadev78)
 
-Contributions are welcome!
