@@ -1,0 +1,10 @@
+import z, { email } from "zod"
+
+
+export const createUserOrAdminSchema = z.object({
+    Name: z.string().min(5,"Name must be atleast 5 characters").max(60,"Name must be atmost 60 characters"),
+    Email: email().min(5,"email must be atleast 5 characters").max(30,"email cannot be more than 30 characters"),
+    Address: z.string().min(5,"Address must be atleast 5 character").max(400,"address cannot be more than 400 characters"),
+    Password: z.string().min(8,"password must be atleast 8 characters").max(16,"password cannot be more than 30 characters").regex(/[A-Z]/,"password must include an uppercase letter").regex(/[^A-Za-z0-9]/,"password must include a special character"),
+    role : z.enum(["ADMIN","NORMAL_USER","STORE_OWNER"])
+})
