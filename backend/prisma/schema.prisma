@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role{
+  NORMAL_USER
+  ADMIN
+  STORE_OWNER
+}
+//below is user model a user can have store and ratings
+model User{
+  id                  Int       @id @default(autoincrement())
+  name                String    @db.VarChar(60) //max length of varchar is 60 in postgres
+  email               String    @unique 
+  address             String    @db.VarChar(400) 
+  passWordHash        String  
+  role                Role      @default(NORMAL_USER) 
+  store               Store[]   @relation("StoreOwner")
+  ratings             Rating[]
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+}
+
+model Store{
+  id                  Int       @id @default(autoincrement())
+  name                String    @db.VarChar(60)
+  email               String    @unique
+  address             String    @db.VarChar(400)
+  ownerId             Int 
+  owner               User      @relation("StoreOwner",fields: [ownerId],references: [id]) //each store has an owner
+  ratings             Rating[]
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+}
+
+model Rating{
+  id                  Int       @id @default(autoincrement())
+  value               Int       //basically rating value betn 1 -5
+  userId              Int     //user who rated
+  storeId             Int
+  user                User      @relation(fields: [userId],references: [id]) //each rating has a user
+  store               Store     @relation(fields: [storeId],references: [id]) //each store has ratings i.e rating is associated with store
+  createdAt           DateTime  @default(now())
+
+}
+
+
+
+
