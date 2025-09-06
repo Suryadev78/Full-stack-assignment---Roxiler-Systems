@@ -53,8 +53,10 @@ model Rating{
   userId              Int     //user who rated
   storeId             Int
   user                User      @relation(fields: [userId],references: [id]) //each rating has a user
-  store               Store     @relation(fields: [storeId],references: [id]) //each store has ratings i.e rating is associated with store
+  store               Store     @relation(fields: [storeId],references: [id]) //each store has ratings i.e rating is associated with 
   createdAt           DateTime  @default(now())
+
+  @@unique([userId, storeId]) 
 
 }
 
