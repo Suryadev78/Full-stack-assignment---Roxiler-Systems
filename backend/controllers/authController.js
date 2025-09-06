@@ -105,3 +105,12 @@ export const updatePassword = async (req,res)=>{
         return res.status(500).json({msg:"error while updating password",error:e.message});
     }
 }
+
+export const logout = async (req,res)=>{
+    try{
+        return res.status(200).json({msg:"logout successful"});
+    }
+    catch(e){    
+        return res.status(500).json({msg:"error occured while logging out",error:e.message});
+    }
+}
