@@ -75,6 +75,7 @@ A full-stack web application for managing users, stores, and ratings. Supports r
 2. **Install dependencies**:
    cd backend
    npm install
+   
 
 3.**Setup the environment variables:**    
    Rename the .env.example file to .env and add the following variables:
@@ -93,7 +94,10 @@ npx prisma generate
 
 5.**Start the server:**
 ```bash
-node index.js
+npm install
+npm run dev   # For development with auto-restart
+# OR
+npm start
 ```
 6.**Install the frontend dependencies:**
 ```bash
