@@ -36,6 +36,19 @@ A full-stack web application for managing users, stores, and ratings. Supports r
 
 ---
 
+## 🛠 Tech Stack
+
+- **Frontend:** React, Vite, TailwindCSS, Shadcn UI, Axios, React Router  
+- **Backend:** Node.js, Express.js  
+- **Database & ORM:** PostgreSQL, Prisma ORM  
+- **Authentication:** JWT (JSON Web Token)  
+- **Deployment:**  
+  - Frontend → Vercel  
+  - Backend → Render  
+  - Database → Neon (PostgreSQL)  
+
+---
+
 ## Login Credentials
 
 - **Admin:**  
