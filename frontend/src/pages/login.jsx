@@ -12,9 +12,11 @@
 
         const validate = () => {
             let newErrors = {};
-            if(email.length < 3){
+            if (email.length < 3) {
                 newErrors.email = "Email must be atleast 3 characters";
-            }
+              } else if (!/\S+@\S+\.\S+/.test(email)) {
+                newErrors.email = "Invalid email";
+              }
             if(password.length < 1){
                 newErrors.password = "Please enter a password";
             }
