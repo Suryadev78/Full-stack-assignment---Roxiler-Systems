@@ -26,7 +26,7 @@
             if(!validate())return ;
             try{
 
-                const res = await axios.post("${API_BASE_URL}/api/v1/user/auth/login" ,{
+                const res = await axios.post(`${API_BASE_URL}/api/v1/user/auth/login` ,{
                     Email :email,
                     Password :password
                 })

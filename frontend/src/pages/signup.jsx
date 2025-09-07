@@ -41,7 +41,7 @@ export default function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-    const res = await axios.post("${API_BASE_URL}/api/v1/user/auth/signup", {
+    const res = await axios.post(`${API_BASE_URL}/api/v1/user/auth/signup`, { 
       Name: name,
       Email: email,
       Password: password,
