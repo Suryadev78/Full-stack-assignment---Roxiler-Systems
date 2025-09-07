@@ -2,35 +2,62 @@
 
 A full-stack web application for managing users, stores, and ratings. Supports role-based access, dashboard statistics, store ratings, and user management. This project demonstrates Admin, Normal User, and Store Owner dashboards with features such as searching, sorting, rating, and password updates.
 
-### Features
+⚠️ **Important:** Some requests (especially under `/admin/*`) may be blocked by **AdBlocker or Brave Shields** due to the word "admin" in API routes. Please **disable or pause ad-blockers** while using the deployed app.
 
-- **Admin:** View dashboard stats (total users, stores, ratings), manage users and stores, view user and store ratings. Tables are sortable and searchable.
-- **Normal User:** Browse stores, rate stores (1–5 stars), update password via dialog box, search stores by name or address.
-- **Store Owner:** View owned stores and their ratings, see users who rated their stores, update password via dialog box.
-- **Role-Based Access:** Admin, Normal User, and Store Owner have different dashboard access and functionality.
-- **Tables:** All tables support sorting (ascending/descending) for key fields like Name, Email, etc.
-- **Password Rules:** Passwords must be 8–16 characters, contain at least one uppercase letter, and one special character.
-- **Search Functionality:** Users and stores can be searched in the dashboards.
-- **JWT Authentication:** Routes are protected based on user role.
+---
 
-### Login Credentials
+## Live Deployment
 
-- **Admin:**  You can login as an admin to explore the Admin dashboard and its functionality.
+- **Deployed here:** [https://full-stack-assignment-roxiler-syste.vercel.app](https://full-stack-assignment-roxiler-syste.vercel.app)  
+
+---
+
+## Features
+
+- **Admin:**
+  - View dashboard stats (total users, stores, ratings).
+  - Manage users and stores.
+  - View user and store ratings.
+  - Tables are **sortable** and **searchable**.
+- **Normal User:**
+  - Browse stores.
+  - Rate stores (1–5 stars).
+  - Update password via dialog box.
+  - Search stores by name or address.
+- **Store Owner:**
+  - View owned stores and their ratings.
+  - See users who rated their stores.
+  - Update password via dialog box.
+- **Role-Based Access:** Admin, Normal User, and Store Owner have different dashboards and functionality.
+- **Tables:** Sorting (ascending/descending) for key fields like Name, Email, etc.
+- **Password Rules:** 8–16 chars, at least one uppercase, one special character.
+- **Search Functionality:** Search users and stores in dashboards.
+- **JWT Authentication:** Role-protected routes.
+
+---
+
+## Login Credentials
+
+- **Admin:**  
   Email: `admin123@gmail.com`  
   Password: `Admin@123`  
 
-- **Normal User:** First, sign up using the signup page you will be redirected to the normal user dashboard.
+- **Normal User:**  
+  Sign up via the signup page, then login.  
 
-- **Store Owner:**  You can login as a store owner to explore the Store Owner dashboard and its functionality.
+- **Store Owner:**  
   Email: `surydev123@gmail.com`  
   Password: `Suryadev@1234`  
 
-### Setup and Running the Project
+---
+
+## Setup and Running Locally
 
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Suryadev78/Full-stack-assignment---Roxiler-Systems.git
    cd Full-stack-assignment---Roxiler-Systems
+
 
 2. **Install dependencies**:
    cd backend
@@ -65,8 +92,9 @@ npm install
 npm run dev
 ```
 8**Access the application:**
-Backend: http://localhost:3000
-Frontend: http://localhost:5173
+You can also run this app locally by cloning the repository and running the backend and frontend servers separately.
+Backend at : http://localhost:3000
+Frontend at: http://localhost:5173
 ### Deployment
 
 To deploy the project, you can use any cloud hosting service that supports Node.js and PostgreSQL.
