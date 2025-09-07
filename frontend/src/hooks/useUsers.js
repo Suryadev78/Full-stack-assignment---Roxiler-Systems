@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
+import {API_BASE_URL} from "../../config.js"
 
 
 export default function useUsers({search}){
@@ -12,7 +13,7 @@ export default function useUsers({search}){
             try{
                 const token = localStorage.getItem("token");
                 const query = search ? `?search=${search}` : "";
-                const res =await axios.get(`http://localhost:3000/api/v1/admin/list-users${query}`,{ 
+                const res =await axios.get(`${API_BASE_URL}/api/v1/admin/list-users${query}`,{
                     headers:{
                         Authorization: `Bearer ${token}`
                     }

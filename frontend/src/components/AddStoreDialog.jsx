@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {API_BASE_URL} from "../../config.js"
 
 export default function AddStore(){
   const [storeName,setStoreName] = useState("");
@@ -18,7 +19,7 @@ export default function AddStore(){
     const fetchUsers = async()=>{
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3000/api/v1/admin/list-users",{
+        const res = await axios.get(`${API_BASE_URL}/api/v1/admin/list-users`,{
           headers:{ Authorization: `Bearer ${token}` }
         });
         setUsers(res.data.users || []);
@@ -56,7 +57,7 @@ export default function AddStore(){
 
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:3000/api/v1/admin/create-store",{
+      await axios.post(`${API_BASE_URL}/api/v1/admin/create-store`,{
         Name: storeName,
         Email: storeEmail,
         Address: storeAddress,

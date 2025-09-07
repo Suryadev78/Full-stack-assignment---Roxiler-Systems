@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as jwt_decode from "jwt-decode";
-
+import {API_BASE_URL} from "../../config.js"
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ export default function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-    const res = await axios.post("http://localhost:3000/api/v1/user/auth/signup", {
+    const res = await axios.post("${API_BASE_URL}/api/v1/user/auth/signup", {
       Name: name,
       Email: email,
       Password: password,

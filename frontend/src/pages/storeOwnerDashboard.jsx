@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import { Input } from "../components/ui/input";
+import {API_BASE_URL} from "../../config.js"
 
 export default function StoreOwnerDashboard() {
   const [stores, setStores] = useState([]);
@@ -17,7 +18,7 @@ export default function StoreOwnerDashboard() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3000/api/v1/store-owner/dashboard", {
+        const res = await axios.get(`${API_BASE_URL}/api/v1/store-owner/dashboard`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setStores(res.data.stores || []);
@@ -170,7 +171,7 @@ function UpdatePasswordForm() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        "http://localhost:3000/api/v1/user/auth/update-password",
+        `${API_BASE_URL}/api/v1/user/auth/update-password`,
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

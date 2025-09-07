@@ -3,6 +3,7 @@
     import * as jwt_decode from "jwt-decode";
     import { useNavigate } from 'react-router-dom';
     import { useState } from 'react'
+    import {API_BASE_URL} from "../../config.js"
     export default function LoginPage() {
         const [email,setEmail] = useState("");
         const [password,setPassword] = useState("");
@@ -25,7 +26,7 @@
             if(!validate())return ;
             try{
 
-                const res = await axios.post("http://localhost:3000/api/v1/user/auth/login" ,{
+                const res = await axios.post("${API_BASE_URL}/api/v1/user/auth/login" ,{
                     Email :email,
                     Password :password
                 })

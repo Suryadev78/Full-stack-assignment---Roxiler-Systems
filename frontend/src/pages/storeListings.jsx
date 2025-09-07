@@ -7,6 +7,7 @@ import axios from "axios";
 import { Button } from "../components/ui/button"
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
+import {API_BASE_URL} from "../../config.js"
 
 export default function NormalUserDashboard() {
   const [storeSearch, setStoreSearch] = useState("");
@@ -35,7 +36,7 @@ export default function NormalUserDashboard() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/rate-store",
+        `${API_BASE_URL}/api/v1/user/rate-store`,
         { storeId, value },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -158,7 +159,7 @@ function UpdatePasswordForm() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        "http://localhost:3000/api/v1/user/auth/update-password",
+        `${API_BASE_URL}/api/v1/user/auth/update-password`,
         { oldPassword : oldPassword, 
             newPassword:newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
