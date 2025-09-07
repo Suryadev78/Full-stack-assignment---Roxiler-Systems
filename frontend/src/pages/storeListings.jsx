@@ -29,7 +29,7 @@ export default function NormalUserDashboard() {
   const logOut = () => {
     localStorage.removeItem("token");
     alert("Logged out successfully");
-    navigate("/login");
+    navigate("/");
   };
 
   const handleSubmitRating = async (storeId, value) => {

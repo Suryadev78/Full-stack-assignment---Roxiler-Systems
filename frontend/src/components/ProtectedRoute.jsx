@@ -7,7 +7,7 @@ const ProtectedRoute = ({children,allowedRoles}) =>{
     const token = localStorage.getItem("token");
     // const user = JSON.parse()
     if(!token){
-        return <Navigate to={"/login"} replace/>
+        return <Navigate to={"/"} replace/>
     }
     console.log(token);
     let user = null;
@@ -17,7 +17,7 @@ const ProtectedRoute = ({children,allowedRoles}) =>{
         // console.log("user role:", user.role);
     } catch(e){
         console.log("jwt error:", e); 
-        return <Navigate to={"/login"} replace/>
+        return <Navigate to={"/"} replace/>
     }
     if(allowedRoles && !allowedRoles.includes(user.role)){
         return <Navigate to={"/unauthorized"} replace/>

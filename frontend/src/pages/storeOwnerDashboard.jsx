@@ -35,7 +35,7 @@ export default function StoreOwnerDashboard() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     alert("Logged out successfully");
-    navigate("/login");
+    navigate("/");
   };
 
   // Sorting state for each store's ratings table - this sorting feature is implemented by AI

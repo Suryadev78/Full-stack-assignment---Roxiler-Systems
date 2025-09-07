@@ -23,7 +23,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
   };
 
   const [userSortConfig, setUserSortConfig] = useState({ key: null, direction: "asc" });
